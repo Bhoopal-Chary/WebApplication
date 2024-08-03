@@ -1,0 +1,57 @@
+﻿@model List<Login>
+
+<div class="container">
+	<div class="row pt-4 pb-3">
+		<div class="col-6">
+			<h2>
+				Employee Login Timesheet
+
+			</h2>
+		</div>
+		@if (ViewBag.UserRole == "Admin")
+		{
+			<div class="col-6 text-end">
+				<a asp-controller="Account" asp-action="EmployeeDetails" class="btn btn-primary">
+					<i class="bi bi-view-list"></i>View users
+				</a>
+            </div>
+		}
+		 @if (ViewBag.UserRole == "LoggedIn")
+		{
+			<div class="col-6 text-end">
+				<a asp-controller="Account" asp-action="Edit" class="btn btn-primary">
+					<i class="bi bi-pencil-square"></i> Edit
+				</a>
+
+
+			</div>
+		} 
+
+	</div>
+</div>
+<table class="table table-bordered table-stripped">
+	<thead>
+	<th>
+		Username
+	</th>
+	<th>
+		LoginsTimes
+	</th>
+	</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model.OrderBy(u => u.LastLoginDate))
+		{
+			<tr>
+				<td>
+					@obj.Username
+				</td>
+				<td>
+					@obj.LastLoginDate
+				</td>
+			</tr>
+		}
+	</tbody>
+	<tr>
+</table>
+</div>
