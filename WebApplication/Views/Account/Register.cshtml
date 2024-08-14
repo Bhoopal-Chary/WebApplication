@@ -2,11 +2,32 @@
 @{
     ViewBag.Title = "Register";
 }
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+            $('img[src="/Images/help.png"]').mouseover(function () {
+
+                    $('#' + divId(this)).fadeIn(500);
+                }).mouseout(function () {
+
+                    $('#' + divId(this)).fadeOut(500);
+                });
+                function divId(helpIcon) {
+                    var helpIconId = $(helpIcon).attr('id');
+                    return helpIconId.replace('img', 'div');
+                }
+        });
+    </script>
+</head>
 
 <div class="container">
 <div class="row pt-4 pb-3">
     <div class="col-6">
-        <h2>
+        <h2 style="margin-top:0.5rem">
             Register
 
         </h2>
@@ -15,31 +36,60 @@
 </div>
 
 
+<div class="shadow-lg mb-5 bg-white" style="border-radius: 1rem;  padding: 2rem">
+    <form asp-action="Register" method="post" class="formstyle">
 
-<form asp-action="Register" method="post">
-    <div class="form-group">
+        <div class="form-group">
+           
         <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
+            <tr>
+                <td><img id="imgUserNameHelp" src="~/Images/help.png" /></td>
+                <td>
+                    <div id="divUserNameHelp" style="display:none">
+                        Enter a username with your First&Lastname
+                    </div>
+                </td>
+            </tr>
+        <input asp-for="Username" class="form-control mt-2" />
+        
         <span asp-validation-for="Username" class="text-danger"></span>
     </div>
-    <div class="form-group">
+        <div class="form-group">
         <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
+            <td><img id="imgPasswordHelp" src="~/Images/help.png" /></td>
+            <td>
+                <div id="divPasswordHelp" style="display:none">
+                    Enter a strong Password
+                </div>
+            </td>
+        <input asp-for="Password" type="password" class="form-control mt-2" />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Email"></label>
-        <input asp-for="Email" type="email" class="form-control" />
+            <td><img id="imgEmailHelp" src="~/Images/help.png" /></td>
+            <td>
+                <div id="divEmailHelp" style="display:none">
+                    Enter a valid Email Address
+                </div>
+            </td>
+        <input asp-for="Email" type="email" class="form-control mt-2" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="SelectedRoleId">Role</label>
-        <select asp-for="SelectedRoleId" class="form-control" asp-items="ViewBag.Roles"></select>
+            <td><img id="imgRoleHelp" src="~/Images/help.png" /></td>
+            <td>
+                <div id="divRoleHelp" style="display:none">
+                   Select a role in dropdown
+                </div>
+            </td>
+        <select asp-for="SelectedRoleId" class="form-control mt-2" asp-items="ViewBag.Roles"></select>
         <span asp-validation-for="SelectedRoleId" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn" style="background-color: #949da4 !important" color: black">Register</button>
 </form>
-
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

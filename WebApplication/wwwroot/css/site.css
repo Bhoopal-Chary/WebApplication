@@ -18,7 +18,11 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+   
 }
 .maindiv {
     background-color: #18bc9c;
@@ -26,3 +30,79 @@ body {
     width: 100%;
     padding: 1rem;
 }
+/*.inputfeild {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}*/
+.formstyle {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
+.sidebar {
+   
+        overflow-x: hidden;
+    flex: 0 0 auto;
+    
+ 
+    padding: 58px 0 0; /* Height of navbar */
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+   
+    z-index: 600;
+    /*position: fixed;*/
+    top: 56px; /* Adjust based on the height of your navbar */
+    bottom: 0;
+    left: 0;
+    width: 250px; /* Adjust the width as needed */
+   
+    overflow-y: auto;
+    background-color: white;
+}
+
+/*@media (max-width: 991.98px) {
+    .sidebar {
+        width: 100%;
+    }
+}*/
+
+    .sidebar .active {
+        border-radius: 5px;
+        background-color: #949da4 !important;
+
+        color: black;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    }
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+.content {
+   /* margin-left: 250px;*/ /* Same as the sidebar width */
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 2rem;
+    display:flex;
+}
+<style >
+.buttonCursorStyle {
+    background-color: lightslategrey;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+.logged-in {
+    margin-left: 250px; /* Adjust based on sidebar width */
+}
+.sidenavSpan {
+    font-weight: 400;
+    font-size: 1.05rem;
+}
+
+

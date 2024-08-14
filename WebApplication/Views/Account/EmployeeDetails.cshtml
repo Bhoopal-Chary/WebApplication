@@ -1,5 +1,7 @@
-﻿@model List<Register>
-@if(TempData["Success"] != null)
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model List<Register>
+@if (TempData["Success"] != null)
 {
 	<h3>@TempData["Success"]</h3>
 }
@@ -17,67 +19,76 @@
 
 </head> *@
 
-<div class="container">
-	<div class="row pt-4 pb-3">
-		<div class="col-6">
-			<h2>
-				Employee Details
+	<div class="container">
+		<div class="row pt-4 pb-3">
+			<div class="col-6">
+				<h2>
+					Employee Details
 
-			</h2>
+				</h2>
+			</div>
 		</div>
 	</div>
-</div>
-<table class="table table-bordered table-stripped" style="font-size: small;">
-<thead>
-<tr>
-	<th>
-		Username
-	</th>
-	<th>
-		Password
-	</th>
-	<th>
-		Email
-	</th>
-	<th>
-		Edit / Delete
-	</th> 
+	<div class="shadow-lg mb-5  bg-white" style="border-radius: 1rem; padding: 2rem">
 
-</tr>
-</thead>
-<tbody>
-	
-	@foreach (var obj in Model.OrderBy(u => u.Username))
-	{
-		<tr>
-			<td>
-				@obj.Username
-			</td>
-			<td>
-				@obj.Password
-			</td>
-			<td>
-				@obj.Email
-			</td>
-			<td>
-					
-				 <div class="w-75 btn-group" role="group">
-					<a asp-controller="Account" asp-action="AdminEdit" asp-route-id="@obj.EmployeeId" class="btn btn-primary mx-2">
-						<i class="bi bi-pencil-square"></i>
-					</a>
-					
-						@if (ViewBag.UserRole == "Admin")
-						{
-							<a id="deletebtn" asp-controller="Account" asp-action="Delete" asp-route-id="@obj.EmployeeId" onclick="return confirm('Are you sure?')" class="btn btn-danger mx-2">
-								<i class="bi bi-trash"></i> 
-							</a>
-						}
 
-				</div> 
-			</td>
-		</tr>
-	}
-</tbody>
-<tr>
-</table>
-</div>
+		<table class="table table-bordered table-stripped" style="font-size: small;">
+			<thead>
+				<tr>
+					<th>
+						Username
+					</th>
+					<th>
+						Password
+					</th>
+					<th>
+						Email
+					</th>
+					<th>
+						Edit / Delete
+					</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var obj in Model.OrderBy(u => u.Username))
+				{
+					<tr>
+						<td>
+							@obj.Username
+						</td>
+						<td>
+							@obj.Password
+						</td>
+						<td>
+							@obj.Email
+						</td>
+						<td>
+
+							<div class="w-75 btn-group" role="group">
+							<a asp-controller="Account" asp-action="AdminEdit" asp-route-id="@obj.EmployeeId" class="btn mx-2" style="background-color: #949da4 !important">
+									<i class="bi bi-pencil-square"></i>
+								</a>
+								@{
+									var userRole = HttpContextAccessor?.HttpContext?.Session.GetString("UserRole");
+								}
+
+								@* <p>
+							@userRole
+							</p> *@
+								@if (userRole == "Admin")
+								{
+									<a id="deletebtn" asp-controller="Account" asp-action="Delete" asp-route-id="@obj.EmployeeId" onclick="return confirm('Are you sure?')" class="btn btn-danger mx-2">
+										<i class="bi bi-trash"></i>
+									</a>
+								}
+
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+			<tr>
+		</table>
+	</div>

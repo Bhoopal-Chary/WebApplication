@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
@@ -80,8 +81,22 @@ namespace WebApp.Controllers
             }
             return View(model);
         }
-		
-		public IActionResult LoginActivity()
+        public async Task<IActionResult> Logout()
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            HttpContext.Session.Clear();
+            ViewBag.UserRole = userRole;
+            // Clear the session
+           
+
+            // Sign out the authentication cookie
+            /*await HttpContext.SignOutAsync();*/
+
+            // Redirect to the login page or home page
+            return RedirectToAction("LoginPage");
+        }
+
+        public IActionResult LoginActivity()
         {
 			var userRole = HttpContext.Session.GetString("UserRole");
             ViewBag.UserRole = userRole;

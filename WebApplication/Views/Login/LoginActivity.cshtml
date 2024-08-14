@@ -8,15 +8,15 @@
 
 			</h2>
 		</div>
-		@if (ViewBag.UserRole == "Admin")
+	@* 	@if (ViewBag.UserRole == "Admin")
 		{
 			<div class="col-6 text-end">
 				<a asp-controller="Account" asp-action="EmployeeDetails" class="btn btn-primary">
 					<i class="bi bi-view-list"></i>View users
 				</a>
             </div>
-		}
-		 @if (ViewBag.UserRole == "LoggedIn")
+		} *@
+		@*  @if (ViewBag.UserRole == "LoggedIn")
 		{
 			<div class="col-6 text-end">
 				<a asp-controller="Account" asp-action="Edit" class="btn btn-primary">
@@ -25,10 +25,11 @@
 
 
 			</div>
-		} 
+		}  *@
 
 	</div>
 </div>
+<div class="shadow-lg mb-5  bg-white" style="border-radius: 1rem;  padding: 2rem">
 <table class="table table-bordered table-stripped">
 	<thead>
 	<th>
@@ -54,4 +55,5 @@
 	</tbody>
 	<tr>
 </table>
+</div>
 </div>

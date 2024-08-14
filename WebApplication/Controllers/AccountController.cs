@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -12,8 +14,9 @@ namespace WebApp.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _db;
+		
 
-        public AccountController(ApplicationDbContext db)
+		public AccountController(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -110,6 +113,7 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
+
             // Update the properties that are allowed to be changed
             register.Password = HashPassword(model.Password);
             register.Email = model.Email;
@@ -133,7 +137,7 @@ namespace WebApp.Controllers
                 return NotFound();
             }
             //return RedirectToAction("EmployeeDetails");
-            return View(register);
+            return View();
 
         }
 
@@ -164,6 +168,7 @@ namespace WebApp.Controllers
 			TempData["Success"] = "Record Deleted successfully";
 			return RedirectToAction("EmployeeDetails");
 		}
-	}
+        
+    }
 }
 
